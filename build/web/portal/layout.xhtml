@@ -38,7 +38,7 @@
             </div>
             <div class="content_head">
                 Eingeloggt als 
-                <h:outputText value="#{request.remoteUser}"/>
+                <h:link value="#{request.remoteUser}" outcome="user_profile"/>
                 (ausloggen)
             </div>
             <div class="c_row">

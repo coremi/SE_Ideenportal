@@ -149,3 +149,14 @@ div.r {
     border-bottom: 2px solid #8F2674;
     margin-bottom: 20px;
 }
+.row .label, .row .form-control {
+    display: inline-block;
+}
+.row .label {
+    width: 30%;
+    text-align: right;
+    margin-right: 10px;
+}
+.row .form-control {
+    width: 65%;
+}
