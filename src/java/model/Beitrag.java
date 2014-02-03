@@ -46,6 +46,7 @@ public class Beitrag implements Serializable {
     
     @OneToMany(mappedBy = "beitrag")
     private Collection<Kommentar> kommentare;
+    
 
     /**
      *
@@ -54,6 +55,11 @@ public class Beitrag implements Serializable {
     @OneToMany
     private Collection<Bild> bilder;
 
+    public Beitrag() {
+        this.datum = new Date();
+        this.bewertung = 0;
+    }
+    
     /**
      * @return the id
      */

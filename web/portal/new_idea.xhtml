@@ -11,14 +11,14 @@
         <h:form>
             <div class="row">
                 <label>Titel*:</label>
-                <input type="text" name="idea_title" value="" />
+                <input type="text" name="idea_title" value="#{Beitrag.titel}" />
             </div>
             <div class="row">
                 <label>Beschreibung*:</label>
-                <textarea name="idea_text" rows="4" cols="20"></textarea>
+                <textarea name="idea_text" rows="4" cols="20" value="#{Beitrag.beschreibung}"></textarea>
             </div>
             <div class="r">
-                <input type="submit" value="Idee einsenden" name="submit" />
+                <input type="submit" value="Idee einsenden" name="submit" action="idea" />
             </div>
         </h:form>
     </ui:define>
