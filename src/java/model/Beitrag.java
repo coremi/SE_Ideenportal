@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -21,6 +22,9 @@ import javax.persistence.Temporal;
 @ManagedBean(name = "beitragBean")
 @SessionScoped
 public class Beitrag implements Serializable {
+    @ManyToMany
+    private Collection<Mitarbeiter> bewerter;
+    
     @ManyToOne
     private Mitarbeiter mitarbeiter;
 
@@ -39,6 +43,9 @@ public class Beitrag implements Serializable {
     private String titel;
 
     private String beschreibung;
+    
+    @OneToMany(mappedBy = "beitrag")
+    private Collection<Kommentar> kommentare;
 
     /**
      *
@@ -178,6 +185,22 @@ public class Beitrag implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public Collection<Mitarbeiter> getBewerter() {
+        return bewerter;
+    }
+
+    public void setBewerter(Collection<Mitarbeiter> bewerter) {
+        this.bewerter = bewerter;
+    }
+
+    public Collection<Kommentar> getKommentare() {
+        return kommentare;
+    }
+
+    public void setKommentare(Collection<Kommentar> kommentare) {
+        this.kommentare = kommentare;
     }
 
 

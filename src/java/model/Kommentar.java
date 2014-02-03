@@ -1,26 +1,18 @@
 package model;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Kommentar extends Beitrag {
+    @ManyToOne
+    private Beitrag beitrag;
 
-    @OneToOne
-    private Beitrag myBeitrag;
-
-    /**
-     * @return the myBeitrag
-     */
-    public Beitrag getMyBeitrag() {
-        return myBeitrag;
+    public Beitrag getBeitrag() {
+        return beitrag;
     }
 
-    /**
-     * @param myBeitrag the myBeitrag to set
-     */
-    public void setMyBeitrag(Beitrag myBeitrag) {
-        this.myBeitrag = myBeitrag;
+    public void setBeitrag(Beitrag beitrag) {
+        this.beitrag = beitrag;
     }
-
 }

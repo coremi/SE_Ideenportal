@@ -26,6 +26,8 @@ public class Bild implements Serializable {
     private Integer breite;
 
     private String titel;
+    
+    private String url;
 
     /**
      * @return the id
@@ -136,6 +138,14 @@ public class Bild implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }

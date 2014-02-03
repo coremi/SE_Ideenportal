@@ -9,12 +9,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
 @ManagedBean(name = "mitarbeiterBean")
 @SessionScoped
 public class Mitarbeiter implements Serializable {
+    @ManyToMany(mappedBy = "bewerter")
+    private List<Beitrag> bewertungen;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -33,7 +36,7 @@ public class Mitarbeiter implements Serializable {
 
     private Integer personalnr;
     
-    private Integer userId;
+    private String username;
 
     /**
      * @return the id
@@ -49,13 +52,6 @@ public class Mitarbeiter implements Serializable {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer UserId) {
-        this.userId = UserId;
-    }
 
     /**
      * @return the beitraege
@@ -154,6 +150,22 @@ public class Mitarbeiter implements Serializable {
     @Override
     public String toString() {
         return "Mitarbeiter{" + "Name=" + name + '}';
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public List<Beitrag> getBewertungen() {
+        return bewertungen;
+    }
+
+    public void setBewertungen(List<Beitrag> bewertungen) {
+        this.bewertungen = bewertungen;
     }
 
 }
