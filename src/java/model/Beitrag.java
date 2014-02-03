@@ -46,7 +46,6 @@ public class Beitrag implements Serializable {
     
     @OneToMany(mappedBy = "beitrag")
     private Collection<Kommentar> kommentare;
-    
 
     /**
      *
@@ -81,19 +80,12 @@ public class Beitrag implements Serializable {
         return datum;
     }
 
-    /**
-     * @param datum the datum to set
-     */
-    public void setDatum(Date datum) {
-        this.datum = datum;
-    }
-
     public Date getEditiert() {
         return editiert;
     }
 
-    public void setEditiert(Date editiert) {
-        this.editiert = editiert;
+    public void setEditiert() {
+        this.editiert = new Date();
     }
 
     /**
@@ -107,7 +99,7 @@ public class Beitrag implements Serializable {
      * @param bewertung the bewertung to set
      */
     public void setBewertung(Integer bewertung) {
-        this.bewertung = bewertung;
+        this.bewertung += bewertung;
     }
 
     public Mitarbeiter getMitarbeiter() {

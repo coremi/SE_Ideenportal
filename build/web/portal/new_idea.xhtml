@@ -11,11 +11,11 @@
         <h:form>
             <div class="row">
                 <label>Titel*:</label>
-                <input type="text" name="idea_title" value="#{Beitrag.titel}" />
+                <input type="text" name="idea_title" value="#{beitragBean.titel}" />
             </div>
             <div class="row">
                 <label>Beschreibung*:</label>
-                <textarea name="idea_text" rows="4" cols="20" value="#{Beitrag.beschreibung}"></textarea>
+                <textarea name="idea_text" rows="4" cols="20" value="#{beitragBean.beschreibung}"></textarea>
             </div>
             <div class="r">
                 <input type="submit" value="Idee einsenden" name="submit" action="idea" />
