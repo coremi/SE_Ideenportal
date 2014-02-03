@@ -3,6 +3,8 @@ package model;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
+@ManagedBean(name = "mitarbeiterBean")
+@SessionScoped
 public class Mitarbeiter implements Serializable {
 
     @Id
@@ -19,17 +23,17 @@ public class Mitarbeiter implements Serializable {
     @OneToMany(mappedBy = "mitarbeiter")
     private List<Beitrag> beitraege;
 
-    private String Name;
+    private String name;
     
-    private String Vorname;
+    private String vorname;
     
-    private String Email;
+    private String email;
 
-    private String Abteilung;
+    private String abteilung;
 
-    private Integer Personalnr;
+    private Integer personalnr;
     
-    private Integer UserId;
+    private Integer userId;
 
     /**
      * @return the id
@@ -46,11 +50,11 @@ public class Mitarbeiter implements Serializable {
     }
 
     public Integer getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(Integer UserId) {
-        this.UserId = UserId;
+        this.userId = UserId;
     }
 
     /**
@@ -71,58 +75,58 @@ public class Mitarbeiter implements Serializable {
      * @return the Name
      */
     public String getName() {
-        return Name;
+        return name;
     }
 
     /**
-     * @param Name the Name to set
+     * @param name the Name to set
      */
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getVorname() {
-        return Vorname;
+        return vorname;
     }
 
-    public void setVorname(String Vorname) {
-        this.Vorname = Vorname;
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
      * @return the Abteilung
      */
     public String getAbteilung() {
-        return Abteilung;
+        return abteilung;
     }
 
     /**
      * @param Abteilung the Abteilung to set
      */
-    public void setAbteilung(String Abteilung) {
-        this.Abteilung = Abteilung;
+    public void setAbteilung(String abteilung) {
+        this.abteilung = abteilung;
     }
 
     /**
      * @return the Personalnr
      */
     public Integer getPersonalnr() {
-        return Personalnr;
+        return personalnr;
     }
 
     /**
      * @param Personalnr the Personalnr to set
      */
-    public void setPersonalnr(Integer Personalnr) {
-        this.Personalnr = Personalnr;
+    public void setPersonalnr(Integer personalnr) {
+        this.personalnr = personalnr;
     }
 
     @Override
@@ -149,7 +153,7 @@ public class Mitarbeiter implements Serializable {
 
     @Override
     public String toString() {
-        return "Mitarbeiter{" + "Name=" + Name + '}';
+        return "Mitarbeiter{" + "Name=" + name + '}';
     }
 
 }

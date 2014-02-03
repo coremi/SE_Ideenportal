@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +18,8 @@ import javax.persistence.Temporal;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
+@ManagedBean(name = "beitragBean")
+@SessionScoped
 public class Beitrag implements Serializable {
     @ManyToOne
     private Mitarbeiter mitarbeiter;
