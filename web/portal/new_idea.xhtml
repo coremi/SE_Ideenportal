@@ -15,10 +15,10 @@
                     <h:inputText id="titel" value="#{ideeController.selected.titel}" title="#{bundle.CreateIdeeTitle_titel}" />
                     <h:outputLabel value="#{bundle.CreateIdeeLabel_beschreibung}" for="beschreibung" />
                     <h:inputTextarea rows="4" cols="20" id="beschreibung" value="#{ideeController.selected.beschreibung}" title="#{bundle.CreateIdeeTitle_beschreibung}" />                  
-                    <!-- unschön: weiß nicht so recht wie ich die beiden beans verbinden kann, damit man nicht die unnötige auswahl braucht-->
+                    <!-- unschön: weiß nicht so recht wie ich die beiden beans verbinden kann, damit man nicht die unnötige auswahl braucht
                     <h:selectOneMenu id="mitarbeiter" value="#{ideeController.selected.mitarbeiter}" title="#{bundle.CreateIdeeTitle_mitarbeiter}" >
                         <f:selectItem itemValue="#{mitarbeiterController.selected}"/>
-                    </h:selectOneMenu>
+                    </h:selectOneMenu>-->
             </h:panelGrid>
             <h:commandLink action="#{ideeController.create}" value="Erstellen" />
         </h:form>

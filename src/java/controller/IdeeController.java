@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -19,10 +20,13 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@Named("ideeController")
+@ManagedBean(name="ideeController")
 @SessionScoped
 public class IdeeController implements Serializable {
 
+    @ManagedProperty("#{mitarbeiterController}")
+    private MitarbeiterController mc;
+    
     private Idee current;
     private DataModel items = null;
     @EJB
@@ -33,6 +37,8 @@ public class IdeeController implements Serializable {
     public IdeeController() {
     }
 
+
+    
     public Idee getSelected() {
         if (current == null) {
             current = new Idee();
@@ -82,6 +88,8 @@ public class IdeeController implements Serializable {
 
     public String create() {
         try {
+            mc.loadMitarbeiter();
+            current.setMitarbeiter(mc.getSelected());
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("IdeeCreated"));
             return prepareCreate();
@@ -191,6 +199,14 @@ public class IdeeController implements Serializable {
 
     public Idee getIdee(java.lang.Long id) {
         return ejbFacade.find(id);
+    }
+
+    public MitarbeiterController getMc() {
+        return mc;
+    }
+
+    public void setMc(MitarbeiterController mc) {
+        this.mc = mc;
     }
 
     @FacesConverter(forClass = Idee.class)

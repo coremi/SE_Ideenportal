@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -18,7 +19,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@Named("mitarbeiterController")
+@ManagedBean(name="mitarbeiterController")
 @SessionScoped
 public class MitarbeiterController implements Serializable {
 
@@ -34,7 +35,7 @@ public class MitarbeiterController implements Serializable {
     public MitarbeiterController() {
         setUsername();      
     }
-
+ 
     public Mitarbeiter getSelected() {
         if (current == null) {
             current = new Mitarbeiter();

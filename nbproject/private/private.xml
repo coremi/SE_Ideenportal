@@ -3,7 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Projects/Uni/se2/Projekt/SE_Ideenportal/web/portal/user_profile.xhtml</file>
+            <file>file:/E:/Projects/Uni/se2/Projekt/SE_Ideenportal/src/java/controller/IdeeController.java</file>
+            <file>file:/E:/Projects/Uni/se2/Projekt/SE_Ideenportal/src/java/facades/MitarbeiterFacade.java</file>
             <file>file:/E:/Projects/Uni/se2/Projekt/SE_Ideenportal/src/java/controller/MitarbeiterController.java</file>
         </group>
     </open-files>
