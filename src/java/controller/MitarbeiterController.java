@@ -28,8 +28,11 @@ public class MitarbeiterController implements Serializable {
     private facades.MitarbeiterFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    private String username;
+    
+    
     public MitarbeiterController() {
+        setUsername();      
     }
 
     public Mitarbeiter getSelected() {
@@ -38,6 +41,27 @@ public class MitarbeiterController implements Serializable {
             selectedItemIndex = -1;
         }
         return current;
+    }
+    
+    public void loadMitarbeiter() {
+        Mitarbeiter tmp = ejbFacade.getMitarbeiter(this.username);
+        if (tmp == null) {
+            //new empty mitarbeiter
+            getSelected();
+            //create in database
+            create();
+        } else {
+            //set current to the one from the db
+            this.current = tmp;
+        }
+    }
+    
+    private void setUsername() {
+        this.username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+    }
+    
+    public String getUsername() {
+        return this.username;
     }
 
     private MitarbeiterFacade getFacade() {
@@ -81,6 +105,8 @@ public class MitarbeiterController implements Serializable {
 
     public String create() {
         try {
+            //always use the username from the logged in user
+            current.setUsername(this.username);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MitarbeiterCreated"));
             return prepareCreate();

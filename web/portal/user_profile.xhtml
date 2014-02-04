@@ -5,55 +5,25 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <ui:define name="content">
-
+        
         <h1>
             Mein Profil
         </h1>
-        <h:form>
-            <div class="row">
-                <div class="label">
-                    <label>Name:</label>
-                </div>
-                <div class="form-control">
-                    <input type="text" name="user_name" value="#{User.mitarbeiter.name}" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="label">
-                    <label>Vorname:</label>
-                </div>
-                <div class="form-control">
-                    <input type="text" name="user_first" value="#{User.mitarbeiter.vorname}" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="label">
-                    <label>Email:</label>
-                </div>
-                <div class="form-control">
-                    <input type="text" name="user_mail" value="#{User.mitarbeiter.email}" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="label">
-                    <label>Abteilung:</label>
-                </div>
-                <div class="form-control">
-                    <input type="text" name="user_abtl" value="#{User.mitarbeiter.abteilung}" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="label">
-                    <label>Personalnummer:</label>
-                </div>
-                <div class="form-control">
-                    <input type="text" name="user_prsnr" value="#{User.mitarbeiter.personalnr}" />
-                </div>
-            </div>
-            <div class="r">
-                <input type="submit" value="Änderungen speichern" name="submit" />
-            </div>
-        </h:form>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateMitarbeiterLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{mitarbeiterController.selected.name}" title="#{bundle.CreateMitarbeiterTitle_name}" />
+                    <h:outputLabel value="#{bundle.CreateMitarbeiterLabel_vorname}" for="vorname" />
+                    <h:inputText id="vorname" value="#{mitarbeiterController.selected.vorname}" title="#{bundle.CreateMitarbeiterTitle_vorname}" />
+                    <h:outputLabel value="#{bundle.CreateMitarbeiterLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{mitarbeiterController.selected.email}" title="#{bundle.CreateMitarbeiterTitle_email}" />
+                    <h:outputLabel value="#{bundle.CreateMitarbeiterLabel_abteilung}" for="abteilung" />
+                    <h:inputText id="abteilung" value="#{mitarbeiterController.selected.abteilung}" title="#{bundle.CreateMitarbeiterTitle_abteilung}" />
+                    <h:outputLabel value="#{bundle.CreateMitarbeiterLabel_personalnr}" for="personalnr" />
+                    <h:inputText id="personalnr" value="#{mitarbeiterController.selected.personalnr}" title="#{bundle.CreateMitarbeiterTitle_personalnr}" />
+                </h:panelGrid>
+                <h:commandLink value="Update" action="#{mitarbeiterController.update()}" />            
+            </h:form>
     </ui:define>
 
 </ui:composition>

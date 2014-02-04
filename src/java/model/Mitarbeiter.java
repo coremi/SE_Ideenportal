@@ -13,8 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-@ManagedBean(name = "mitarbeiterBean")
-@SessionScoped
 public class Mitarbeiter implements Serializable {
     @ManyToMany(mappedBy = "bewerter")
     private List<Beitrag> bewertungen;

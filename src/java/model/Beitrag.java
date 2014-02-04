@@ -19,8 +19,6 @@ import javax.persistence.Temporal;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-@ManagedBean(name = "beitragBean")
-@SessionScoped
 public class Beitrag implements Serializable {
     @ManyToMany
     private Collection<Mitarbeiter> bewerter;

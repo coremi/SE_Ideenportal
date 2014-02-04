@@ -38,10 +38,11 @@
             </div>
             <div class="content_head">
                 Eingeloggt als 
-                <h:link value="#{User.username}" outcome="user_profile"/>
+                <h:link value="#{mitarbeiterController.username}" outcome="user_profile" />
                 (ausloggen)
             </div>
             <div class="c_row">
+                <inputHidden value="#{mitarbeiterController.loadMitarbeiter()}" />
                 <ui:insert name="content">Content</ui:insert>
             </div>
         </div>
