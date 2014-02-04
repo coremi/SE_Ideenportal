@@ -2,6 +2,34 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./layout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="content">
+        <h1>
+            Neue Idee
+        </h1>
+        <h:form>
+            <div class="row">
+                <h:outputLabel value="#{bundle.CreateIdeeLabel_titel}" for="titel" class="label"/>
+                    <h:inputText id="titel" value="#{ideeController.selected.titel}" title="#{bundle.CreateIdeeTitle_titel}" class="form-control" />
+                    
+            </div>
+            <div class="row">
+                <h:outputLabel value="#{bundle.CreateIdeeLabel_beschreibung}" for="beschreibung" class="label" />
+                    <h:inputTextarea rows="4" cols="20" id="beschreibung" value="#{ideeController.selected.beschreibung}" title="#{bundle.CreateIdeeTitle_beschreibung}" class="form-control" />                  
+                    
+            </div>
+            <h:commandLink action="#{ideeController.create}" value="Erstellen" class="button r" />
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
+<!-- old<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./layout.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
@@ -15,13 +43,14 @@
                     <h:inputText id="titel" value="#{ideeController.selected.titel}" title="#{bundle.CreateIdeeTitle_titel}" />
                     <h:outputLabel value="#{bundle.CreateIdeeLabel_beschreibung}" for="beschreibung" />
                     <h:inputTextarea rows="4" cols="20" id="beschreibung" value="#{ideeController.selected.beschreibung}" title="#{bundle.CreateIdeeTitle_beschreibung}" />                  
-                    <!-- unschön: weiß nicht so recht wie ich die beiden beans verbinden kann, damit man nicht die unnötige auswahl braucht
+                    unschön: weiß nicht so recht wie ich die beiden beans verbinden kann, damit man nicht die unnötige auswahl braucht
                     <h:selectOneMenu id="mitarbeiter" value="#{ideeController.selected.mitarbeiter}" title="#{bundle.CreateIdeeTitle_mitarbeiter}" >
                         <f:selectItem itemValue="#{mitarbeiterController.selected}"/>
-                    </h:selectOneMenu>-->
+                    </h:selectOneMenu>
             </h:panelGrid>
             <h:commandLink action="#{ideeController.create}" value="Erstellen" />
         </h:form>
     </ui:define>
     
-</ui:composition>
+</ui:composition> -->
+
