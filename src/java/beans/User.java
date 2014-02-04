@@ -6,9 +6,11 @@
 
 package beans;
 
+import controller.MitarbeiterController;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -27,6 +29,9 @@ import model.Mitarbeiter;
 public class User implements Serializable {
     String username;
     Mitarbeiter mitarbeiter;
+    
+    @ManagedProperty("#{mitarbeiterController}")
+    private MitarbeiterController mc;
     
     /**
      * Creates a new instance of User
@@ -50,7 +55,11 @@ public class User implements Serializable {
         if (list.isEmpty()) { 
             //hier muss der neue mitarbeiter iwie mit controller/facade/was weiß ich verbunden werden
             //hab hier wild mit MAController.create() rumprobiert, hat aber alles nicht geklappt iwie
-            this.mitarbeiter = new Mitarbeiter();
+            //System.out.println("User: " + mc.getSelected().getUsername());
+            Mitarbeiter tmp = mc.getSelected();
+            tmp.setUsername(this.username);
+            mc.create();
+            // weiß nicht, wie man den MA wieder rausbekommt um this.ma auf den zu setzen. weil nach dem create das getselected ein neues leeres element ist
         } else {
             //setzt mitarbeiter auf die daten aus der db
             this.mitarbeiter = list.get(0);
@@ -67,5 +76,13 @@ public class User implements Serializable {
     
     public void logout() {
         
+    }
+
+    public MitarbeiterController getMc() {
+        return mc;
+    }
+
+    public void setMc(MitarbeiterController mc) {
+        this.mc = mc;
     }
 }
