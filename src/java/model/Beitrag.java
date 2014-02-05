@@ -1,11 +1,10 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +30,7 @@ public class Beitrag implements Serializable {
     private Long id;
 
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date datum;
+    private final Date datum;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date editiert;
@@ -55,6 +54,7 @@ public class Beitrag implements Serializable {
     public Beitrag() {
         this.datum = new Date();
         this.bewertung = 0;
+        this.bilder= new ArrayList<Bild>();
     }
     
     /**
@@ -136,7 +136,6 @@ public class Beitrag implements Serializable {
         this.beschreibung = beschreibung;
     }
 
-
     /**
      * @return the bilder
      */
@@ -149,6 +148,14 @@ public class Beitrag implements Serializable {
      */
     public void setBilder(Collection<Bild> bilder) {
         this.bilder = bilder;
+    }
+    
+    public void addBild(Bild bild) {
+        this.bilder.add(bild);
+    }
+    
+    public void removeBild(Bild bild) {
+        this.bilder.remove(bild);
     }
 
     /**

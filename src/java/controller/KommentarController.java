@@ -17,6 +17,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import model.Idee;
+import model.Mitarbeiter;
 
 @Named("kommentarController")
 @SessionScoped
@@ -30,6 +32,17 @@ public class KommentarController implements Serializable {
     private int selectedItemIndex;
 
     public KommentarController() {
+    }
+    
+    /**
+     * creates a new kommentar in the database
+     * @param idee
+     * @param mitarbeiter 
+     */
+    public void createKommentar(Idee idee, Mitarbeiter mitarbeiter) {
+        current.setBeitrag(idee);
+        current.setMitarbeiter(mitarbeiter);
+        create();
     }
 
     public Kommentar getSelected() {

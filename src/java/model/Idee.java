@@ -36,5 +36,4 @@ public class Idee extends Beitrag {
     public void setAnhaenge(Collection<Anhang> anhaenge) {
         this.anhaenge = anhaenge;
     }
-
 }

@@ -6,6 +6,8 @@ import controller.util.PaginationHelper;
 import facades.IdeeFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -18,6 +20,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+import model.Bild;
 
 @Named("ideeController")
 @SessionScoped
@@ -33,6 +36,14 @@ public class IdeeController implements Serializable {
     private int selectedItemIndex;
 
     public IdeeController() {
+    }
+      
+    public String saveBild(Bild bild) {
+        Bild tmp = new Bild();
+        tmp.setUrl(bild.getUrl());
+        tmp.setTitel(bild.getTitel());
+        current.addBild(tmp);
+        return "edit_idea.xhtml?faces-redirect-true";
     }
 
     /**

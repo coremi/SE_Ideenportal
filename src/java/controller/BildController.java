@@ -31,7 +31,7 @@ public class BildController implements Serializable {
 
     public BildController() {
     }
-
+            
     public Bild getSelected() {
         if (current == null) {
             current = new Bild();

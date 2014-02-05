@@ -2,7 +2,8 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./layout.xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html">
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="content">
         <h1>
@@ -21,6 +22,16 @@
             <h:commandLink action="#{ideeController.update}" value="Speichern" class="button r" />
             <!-- redirect to idea.xhtml, without changing the database entry -->
             <h:commandLink action="#{ideeController.showIdee(ideeController.selected.id)}" value="Abbrechen" class="button r" />
+            <br/><br/><br/><br/>
+            <!-- Angehängte Bilder auflisten -->
+            Angehängte Bilder:
+            <c:forEach var="bilder" items="#{ideeController.selected.bilder}">
+                <br/>
+                Titel: ${bilder.titel} url: ${bilder.url}
+            </c:forEach>
+            
+            <!-- redirect to add_bild.xhtml -->
+            <h:link outcome="add_bild" value="Bild hinzufügen" class="button r" />
         </h:form>
     </ui:define>
 </ui:composition>

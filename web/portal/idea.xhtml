@@ -11,20 +11,45 @@
                 <h:outputText value="#{ideeController.selected.titel}"></h:outputText>
             </h1>
             <hr />
+            <!-- extra options if the logged in mitarbeiter is the author -->
+            <c:if test="${mitarbeiterController.username == ideeController.selected.mitarbeiter.username}">
+                <!-- redirects to an edit form for the idea -->
+                <h:commandLink value="Bearbeiten" action="#{ideeController.editIdee()}" />
+            </c:if>
             <h:outputText value="#{ideeController.selected.mitarbeiter.username}"></h:outputText>
             <h:outputText value="#{ideeController.selected.bewertung}" />
             <h:outputText value="#{ideeController.selected.datum}" />
             <hr />
             <h:outputText value="#{ideeController.selected.beschreibung}"></h:outputText>
-            <!-- extra options if the logged in mitarbeiter is the author -->
+            <!-- last edited if exists -->
             <c:if test="${ideeController.selected.editiert != null}">
                 Zuletzt bearbeitet:
                 <h:outputText value="#{ideeController.selected.editiert}"></h:outputText>    
             </c:if>
-            <c:if test="${mitarbeiterController.username == ideeController.selected.mitarbeiter.username}">
-                <h:commandLink value="Bearbeiten" action="#{ideeController.editIdee()}" class="button r" />
-                <h:commandLink value="Löschen" action="#{ideeController.destroy()}" class="button r" />
-            </c:if>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <!-- show kommentare -->
+            <c:forEach var="kommentar" items="#{kommentarController.itemsAvailableSelectMany}">
+                <c:if test="${kommentar.value.beitrag == ideeController.selected}">
+                    <div class="row">
+                        <h:outputText value="#{kommentar.value.mitarbeiter.username}" />
+                        schrieb am 
+                        <h:outputText value="#{kommentar.value.datum}" />
+                        :
+                        <br/>
+                        <h:outputText value="#{kommentar.value.beschreibung}" />
+                    </div>
+                </c:if>
+            </c:forEach>
+            <br/>
+            <br/>
+            <br/>
+            <div>
+            <h:inputText value="#{kommentarController.selected.beschreibung}"/>
+            <h:commandLink value="Kommentar hinterlassen" action="#{kommentarController.createKommentar(ideeController.selected, mitarbeiterController.selected)}" class="button r" />
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>
