@@ -58,6 +58,14 @@ public class Beitrag implements Serializable {
     }
     
     /**
+     * add a given kommentar to the beitrag
+     * @param kommentar 
+     */
+    public void addKommentar(Kommentar kommentar) {
+        this.kommentare.add(kommentar);
+    }
+    
+    /**
      * @return the id
      */
     public Long getId() {

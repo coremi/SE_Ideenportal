@@ -17,6 +17,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import model.Idee;
 import model.Mitarbeiter;
 
@@ -24,6 +25,8 @@ import model.Mitarbeiter;
 @SessionScoped
 public class KommentarController implements Serializable {
 
+    @Inject
+    IdeeController ic;
     private Kommentar current;
     private DataModel items = null;
     @EJB
@@ -35,14 +38,16 @@ public class KommentarController implements Serializable {
     }
     
     /**
-     * creates a new kommentar in the database
+     * creates a new kommentar entry in the database
      * @param idee
      * @param mitarbeiter 
      */
-    public void createKommentar(Idee idee, Mitarbeiter mitarbeiter) {
+    public String createKommentar(Idee idee, Mitarbeiter mitarbeiter) {
         current.setBeitrag(idee);
         current.setMitarbeiter(mitarbeiter);
-        create();
+        ic.addKommentar(current);
+        current = new Kommentar();
+        return "idea.xhtml?faces-redirect-true";
     }
 
     public Kommentar getSelected() {
