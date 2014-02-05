@@ -19,12 +19,13 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 
-@ManagedBean(name="ideeController")
+@Named("ideeController")
 @SessionScoped
 public class IdeeController implements Serializable {
 
-    @ManagedProperty("#{mitarbeiterController}")
+    @Inject
     private MitarbeiterController mc;
     
     private Idee current;
