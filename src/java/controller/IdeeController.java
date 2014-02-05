@@ -37,7 +37,7 @@ public class IdeeController implements Serializable {
 
     public IdeeController() {
     }
-      
+          
     /**
      * adds a vote to the bewertung
      * @param i
