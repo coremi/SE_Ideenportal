@@ -3,18 +3,39 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./layout.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        <h:form>
+        <h:form class="idea_view">
             <h1>
-                <h:outputText value="#{ideeController.selected.titel}"></h:outputText>
+                <h:outputText value="#{ideeController.selected.titel}" />
             </h1>
+            <div class="row">
+                <h:outputText value="#{ideeController.selected.beschreibung}" />
+            </div>
+            <div class="row">
+                <!-- Angehängte Bilder auflisten -->
+                Angehängte Bilder:
+                <c:forEach var="bilder" items="#{ideeController.selected.bilder}">
+                    <br/>
+                    Titel: ${bilder.titel} url: ${bilder.url}
+                </c:forEach>         
+            </div>
+            <!-- last edited if exists -->
+            <c:if test="${ideeController.selected.editiert != null}">
+                <div class="row">
+                    Zuletzt bearbeitet:
+                    <h:outputText value="#{ideeController.selected.editiert}"></h:outputText>  
+                </div>  
+            </c:if>
             <hr />
             <!-- extra options if the logged in mitarbeiter is the author -->
             <c:if test="${mitarbeiterController.username == ideeController.selected.mitarbeiter.username}">
-                <!-- redirects to an edit form for the idea -->
-                <h:commandLink value="Bearbeiten" action="#{ideeController.editIdee()}" />
+                <div class="r">
+                    <!-- redirects to an edit form for the idea -->
+                    <h:commandLink value="Bearbeiten" action="#{ideeController.editIdee()}" />
+                </div>
             </c:if>
             <c:if test="${mitarbeiterController.username != ideeController.selected.mitarbeiter.username}">
                 <c:if test="${ideeController.alreadyVoted(mitarbeiterController.selected) == false}">
@@ -22,27 +43,19 @@
                     <h:commandLink value="Negativ bewerten" action="#{ideeController.voteIdee(-1)}" />
                 </c:if>
             </c:if>
-            <h:outputText value="#{ideeController.selected.mitarbeiter.username}"></h:outputText>
-            <h:outputText value="#{ideeController.selected.bewertung}" />
-            <h:outputText value="#{ideeController.selected.datum}" />
+            <div class="author">
+                <h:outputText value="#{ideeController.selected.mitarbeiter.username}" />
+            </div>
+            <div class="vote">
+                <h:outputText value="#{ideeController.selected.bewertung}" />
+            </div>
+            <div class="date">
+                <h:outputText value="#{ideeController.selected.datum}">
+                    <f:convertDateTime type="both" pattern="dd.MM.YYYY hh:mm" />
+                </h:outputText>
+            </div>
+
             <hr />
-            <h:outputText value="#{ideeController.selected.beschreibung}"></h:outputText>
-            <!-- last edited if exists -->
-            <c:if test="${ideeController.selected.editiert != null}">
-                Zuletzt bearbeitet:
-                <h:outputText value="#{ideeController.selected.editiert}"></h:outputText>    
-            </c:if>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <!-- Angehängte Bilder auflisten -->
-            Angehängte Bilder:
-            <c:forEach var="bilder" items="#{ideeController.selected.bilder}">
-                <br/>
-                Titel: ${bilder.titel} url: ${bilder.url}
-            </c:forEach>               
-            <br/><br/><br/><br/>
             <!-- show kommentare -->
             <c:forEach var="kommentar" items="#{kommentarController.itemsAvailableSelectMany}">
                 <c:if test="${kommentar.value.beitrag == ideeController.selected}">
@@ -60,8 +73,8 @@
             <br/>
             <br/>
             <div>
-            <h:inputText value="#{kommentarController.selected.beschreibung}"/>
-            <h:commandLink value="Kommentar hinterlassen" action="#{kommentarController.createKommentar(ideeController.selected, mitarbeiterController.selected)}" class="button r" />
+                <h:inputText value="#{kommentarController.selected.beschreibung}"/>
+                <h:commandLink value="Kommentar hinterlassen" action="#{kommentarController.createKommentar(ideeController.selected, mitarbeiterController.selected)}" class="button r" />
             </div>
         </h:form>
     </ui:define>

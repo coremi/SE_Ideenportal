@@ -165,3 +165,17 @@ label {
 .row .form-control {
     width: 65%;
 }
+
+hr {
+    height: 2px;
+    border-color: #8F2674;
+}
+.idea_view div {
+    display: inline-block;
+}
+.idea_view .author {
+    width: 40%;
+}
+.idea_view .vote, .idea_view .date {
+    width: 20%;
+}
