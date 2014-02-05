@@ -16,6 +16,12 @@
                 <!-- redirects to an edit form for the idea -->
                 <h:commandLink value="Bearbeiten" action="#{ideeController.editIdee()}" />
             </c:if>
+            <c:if test="${mitarbeiterController.username != ideeController.selected.mitarbeiter.username}">
+                <c:if test="${ideeController.alreadyVoted(mitarbeiterController.selected) == false}">
+                    <h:commandLink value="Positiv bewerten" action="#{ideeController.voteIdee(1)}" />
+                    <h:commandLink value="Negativ bewerten" action="#{ideeController.voteIdee(-1)}" />
+                </c:if>
+            </c:if>
             <h:outputText value="#{ideeController.selected.mitarbeiter.username}"></h:outputText>
             <h:outputText value="#{ideeController.selected.bewertung}" />
             <h:outputText value="#{ideeController.selected.datum}" />

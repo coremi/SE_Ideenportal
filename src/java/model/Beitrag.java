@@ -189,6 +189,10 @@ public class Beitrag implements Serializable {
         }
         return true;
     }
+    
+    public void addBewerter(Mitarbeiter mitarbeiter) {
+        this.bewerter.add(mitarbeiter);
+    }
 
     public Collection<Mitarbeiter> getBewerter() {
         return bewerter;

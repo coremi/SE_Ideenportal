@@ -19,6 +19,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import model.Bild;
+import model.Mitarbeiter;
 
 @Named("ideeController")
 @SessionScoped
@@ -36,6 +37,22 @@ public class IdeeController implements Serializable {
     public IdeeController() {
     }
       
+    
+    public String voteIdee(int i) {
+        current.setBewertung(i);
+        current.addBewerter(mc.getSelected());
+        return update();
+    }
+    
+    public boolean alreadyVoted(Mitarbeiter mitarbeiter) {
+        for (Mitarbeiter m : current.getBewerter()) {
+            if (m.getId() == mitarbeiter.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     /**
      * adds a given bild to the idee
      * @param bild
@@ -158,15 +175,24 @@ public class IdeeController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
-
+    
+    /**
+     * redirects to the idea.xhtml after successfully updating a new idea,
+     * adds a timestamp when the update happened
+     * @return 
+     */
+    public String updateWithEditDate() {
+        //update editiert value on changes
+        current.setEditiert();
+        return update();
+    }
+    
     /**
      * redirects to the idea.xhtml after successfully updating a new idea
      * @return 
      */
     public String update() {
         try {
-            //update editiert value on changes
-            current.setEditiert();
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("IdeeUpdated"));
             return "idea.xhtml?faces-redirect-true";
