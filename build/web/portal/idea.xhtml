@@ -15,10 +15,6 @@
                 <h:outputText value="#{ideeController.selected.beschreibung}" />
             </div>
             <hr class="small" />
-            <div class="row">
-                <!-- Angehängte Bilder auflisten -->
-                Angehängte Bilder:     
-            </div>
             <c:forEach var="bilder" items="#{ideeController.selected.bilder}">
                 <div class="row">
                     <div class="img">
