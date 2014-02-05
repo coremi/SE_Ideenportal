@@ -183,3 +183,17 @@ hr {
 .idea_view .vote a {
     font-weight: bold;
 }
+.idea_view .img {
+    width: 100%;
+    text-align: center;
+}
+.idea_view .img img {
+    width: 50%;
+}
+.idea_view .img .img_title {
+    width: 50%;
+}
+
+hr.small {
+    width: 20%;
+}

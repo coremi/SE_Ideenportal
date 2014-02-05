@@ -14,19 +14,29 @@
             <div class="row">
                 <h:outputText value="#{ideeController.selected.beschreibung}" />
             </div>
+            <hr class="small" />
             <div class="row">
                 <!-- Angehängte Bilder auflisten -->
-                Angehängte Bilder:
-                <c:forEach var="bilder" items="#{ideeController.selected.bilder}">
-                    <br/>
-                    Titel: ${bilder.titel} url: ${bilder.url}
-                </c:forEach>         
+                Angehängte Bilder:     
             </div>
+            <c:forEach var="bilder" items="#{ideeController.selected.bilder}">
+                <div class="row">
+                    <div class="img">
+                        <img src="${bilder.url}" alt="${bilder.titel}"/><br />
+                        <div class="img_title">
+                            Titel: ${bilder.titel}
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>    
             <!-- last edited if exists -->
             <c:if test="${ideeController.selected.editiert != null}">
+                <hr class="small" />
                 <div class="row">
                     Zuletzt bearbeitet:
-                    <h:outputText value="#{ideeController.selected.editiert}"></h:outputText>  
+                    <h:outputText value="#{ideeController.selected.editiert}">
+                        <f:convertDateTime type="both" pattern="dd.MM.YYYY hh:mm" />
+                    </h:outputText>  
                 </div>  
             </c:if>
             <hr />
@@ -41,7 +51,6 @@
                 <h:outputText value="#{ideeController.selected.mitarbeiter.username}" />
             </div>
             <div class="vote">
-
                 <c:choose>
                     <c:when test="${(ideeController.alreadyVoted(mitarbeiterController.selected) == false) and (mitarbeiterController.username != ideeController.selected.mitarbeiter.username)}">
                         <h:commandLink value="-" action="#{ideeController.voteIdee(-1)}" />
