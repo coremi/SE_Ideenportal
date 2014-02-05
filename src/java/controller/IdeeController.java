@@ -10,8 +10,6 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -26,8 +24,7 @@ import javax.inject.Inject;
 public class IdeeController implements Serializable {
 
     @Inject
-    private MitarbeiterController mc;
-    
+    private MitarbeiterController mc;  
     private Idee current;
     private DataModel items = null;
     @EJB
@@ -38,8 +35,29 @@ public class IdeeController implements Serializable {
     public IdeeController() {
     }
 
-
+    /**
+     * redirects to the idea.xhtml for the idea with the given id
+     * @param id
+     * @return 
+     */
+    public String showIdee(java.lang.Long id) {
+        current = ejbFacade.find(id);
+        return "idea.xhtml?faces-redirect-true";
+    }
     
+    public String editIdee() {
+        return "edit_idea.xhtml?faces-redirect-true";
+    }
+    
+    /**
+     * deselects any selected idee and redirects to new_idea.xhtml
+     * @return 
+     */
+    public String newIdee() {
+        current = new Idee();
+        return "new_idea.xhtml?faces-redirect-true";
+    }
+
     public Idee getSelected() {
         if (current == null) {
             current = new Idee();
@@ -47,7 +65,7 @@ public class IdeeController implements Serializable {
         }
         return current;
     }
-
+   
     private IdeeFacade getFacade() {
         return ejbFacade;
     }
@@ -81,15 +99,21 @@ public class IdeeController implements Serializable {
         return "View";
     }
 
+    /**
+     * redirects to the my_ideas page after creating a new idea
+     * @return 
+     */
     public String prepareCreate() {
         current = new Idee();
         selectedItemIndex = -1;
-        return "Create";
+        return "my_ideas.xhtml?faces-redirect-true";
     }
 
     public String create() {
         try {
-            mc.loadMitarbeiter();
+            //be sure that the logged in mitarbeiter is selected
+            mc.loadLoggedMitarbeiter();
+            //sets the author of the idea to the logged in mitarbeiter
             current.setMitarbeiter(mc.getSelected());
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("IdeeCreated"));
@@ -106,24 +130,34 @@ public class IdeeController implements Serializable {
         return "Edit";
     }
 
+    /**
+     * redirects to the idea.xhtml after successfully updating a new idea
+     * @return 
+     */
     public String update() {
         try {
+            //update editiert value on changes
+            current.setEditiert();
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("IdeeUpdated"));
-            return "View";
+            return "idea.xhtml?faces-redirect-true";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
+    /**
+     * delete the selected idee and redirects to my_ideas.xhtml
+     * @return 
+     */
     public String destroy() {
         current = (Idee) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "List";
+        return "my_ideas.xhtml?faces-redirect-true";
     }
 
     public String destroyAndView() {

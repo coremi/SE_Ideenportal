@@ -6,15 +6,25 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="content">
-        <h1>
-            <h:outputText value="#{ideeController.selected.titel}"></h:outputText>
-        </h1>
-        <hr />
-        <h:outputText value="#{ideeController.selected.mitarbeiter.username}"></h:outputText>
-        <h:outputText value="#{ideeController.selected.bewertung}" />
-        <h:outputText value="#{ideeController.selected.datum}" />
-        <hr />
-        <h:outputText value="#{ideeController.selected.beschreibung}"></h:outputText>
+        <h:form>
+            <h1>
+                <h:outputText value="#{ideeController.selected.titel}"></h:outputText>
+            </h1>
+            <hr />
+            <h:outputText value="#{ideeController.selected.mitarbeiter.username}"></h:outputText>
+            <h:outputText value="#{ideeController.selected.bewertung}" />
+            <h:outputText value="#{ideeController.selected.datum}" />
+            <hr />
+            <h:outputText value="#{ideeController.selected.beschreibung}"></h:outputText>
+            <!-- extra options if the logged in mitarbeiter is the author -->
+            <c:if test="${ideeController.selected.editiert != null}">
+                Zuletzt bearbeitet:
+                <h:outputText value="#{ideeController.selected.editiert}"></h:outputText>    
+            </c:if>
+            <c:if test="${mitarbeiterController.username == ideeController.selected.mitarbeiter.username}">
+                <h:commandLink value="Bearbeiten" action="#{ideeController.editIdee()}" class="button r" />
+                <h:commandLink value="Löschen" action="#{ideeController.destroy()}" class="button r" />
+            </c:if>
+        </h:form>
     </ui:define>
-
 </ui:composition>

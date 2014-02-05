@@ -10,21 +10,25 @@
             Alle Ideen
         </h1>
         <div class="idea_list">
+            <!-- show every idee entry from database -->
             <c:forEach var="idee" items="${ideeController.itemsAvailableSelectMany}">
-            <div class="row">
-                <div class="topic">
-                    <h:link outcome="idea" value="${idee.label}" />
-                </div>
-                <div class="author">
-                    
-                </div>
-                <div class="vote">
-                </div>
-                <div class="comments">
-                </div>
-            </div>
-        </c:forEach>
+                <h:form>
+                    <div class="row">
+                        <div class="topic">
+                            <!-- show the idea.xhtml on click on the idee titel -->
+                            <h:commandLink action="#{ideeController.showIdee(idee.value.id)}" value="${idee.value.titel}" />
+                        </div>
+                        <div class="author">
+                            <h:outputLabel value="${idee.value.mitarbeiter.username}" />
+                        </div>
+                        <div class="vote">
+                            <h:outputLabel value="${idee.value.bewertung}" />
+                        </div>
+                        <div class="comments">
+                        </div>
+                    </div>
+                </h:form>
+            </c:forEach>
         </div>
     </ui:define>
-
 </ui:composition>

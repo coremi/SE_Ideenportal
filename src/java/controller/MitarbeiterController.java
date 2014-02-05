@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -36,29 +35,33 @@ public class MitarbeiterController implements Serializable {
         setUsername();      
     }
  
+    /*
+    * sets current to the logged in Mitarbeiter,
+    * creates a new db entry if not already there
+    */
+    public void loadLoggedMitarbeiter() {
+        Mitarbeiter tmp = ejbFacade.getMitarbeiter(this.username);
+        if (tmp == null) {
+            getSelected();
+            create();
+        } else {
+            this.current = tmp;
+        }
+    }
+
+    /**
+     * sets the username to the logged in mitarbeiter
+     */
+    private void setUsername() {
+        this.username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+    }
+    
     public Mitarbeiter getSelected() {
         if (current == null) {
             current = new Mitarbeiter();
             selectedItemIndex = -1;
         }
         return current;
-    }
-    
-    public void loadMitarbeiter() {
-        Mitarbeiter tmp = ejbFacade.getMitarbeiter(this.username);
-        if (tmp == null) {
-            //new empty mitarbeiter
-            getSelected();
-            //create in database
-            create();
-        } else {
-            //set current to the one from the db
-            this.current = tmp;
-        }
-    }
-    
-    private void setUsername() {
-        this.username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
     }
     
     public String getUsername() {
@@ -106,7 +109,7 @@ public class MitarbeiterController implements Serializable {
 
     public String create() {
         try {
-            //always use the username from the logged in user
+            //use username of logged in mitarbeiter for the db entry
             current.setUsername(this.username);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MitarbeiterCreated"));

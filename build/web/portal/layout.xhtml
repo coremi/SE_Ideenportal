@@ -15,38 +15,42 @@
 
     <h:body>
         <nav>
-            <h:link outcome="index">
-                <img id="title" src="../resources/img/title.svg"></img>
-            </h:link>
-            <ul>
-                <li>
-                    <h:link value="Home" outcome="index"/>
-                </li>
-                <li>
-                    <h:link value="Neue Idee" outcome="new_idea"/>
-                </li>
-                <li>
-                    <h:link value="Meine Ideen" outcome="my_ideas"/>
-                </li>
-                <li>
-                    <h:link value="Alle Ideen" outcome="ideas"/>
-                </li>
-            </ul>
+            <h:form>
+                <!-- make sure that the logged in mitarbeiter is always selected -->    
+                <inputHidden value="#{mitarbeiterController.loadLoggedMitarbeiter()}" />
+                <h:link outcome="index">
+                    <img id="title" src="../resources/img/title.svg"></img>
+                </h:link>
+                <ul>
+                    <li>
+                        <h:link value="Home" outcome="index"/>
+                    </li>
+                    <li>
+                        <!-- make sure that no idea is selected before redirecting to new_idea.xhtml -->
+                        <h:commandLink action="#{ideeController.newIdee()}" value="Neue Idee" />
+                    </li>
+                    <li>
+                        <h:link value="Meine Ideen" outcome="my_ideas"/>
+                    </li>
+                    <li>
+                        <h:link value="Alle Ideen" outcome="ideas"/>
+                    </li>
+                </ul>
+            </h:form>
         </nav>
         <div class="content">
             <div class="content_bg">
             </div>
+            <!-- user informations and logout -->
             <div class="content_head">
                 Eingeloggt als 
                 <h:link value="#{mitarbeiterController.username}" outcome="user_profile" />
                 (ausloggen)
             </div>
             <div class="c_row">
-                <inputHidden value="#{mitarbeiterController.loadMitarbeiter()}" />
+                <!-- insert page content here -->
                 <ui:insert name="content">Content</ui:insert>
             </div>
         </div>
-
     </h:body>
-
 </html>
