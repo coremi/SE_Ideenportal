@@ -31,6 +31,15 @@ public class BildController implements Serializable {
 
     public BildController() {
     }
+    
+    /**
+     * deselects any selected bild and redirects to add_bild.xhtml
+     * @return 
+     */
+    public String newBild() {
+        current = new Bild();
+        return "add_bild.xhtml?faces-redirect-true";
+    }
             
     public Bild getSelected() {
         if (current == null) {

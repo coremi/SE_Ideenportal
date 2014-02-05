@@ -6,8 +6,6 @@ import controller.util.PaginationHelper;
 import facades.IdeeFacade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -38,12 +36,28 @@ public class IdeeController implements Serializable {
     public IdeeController() {
     }
       
+    /**
+     * adds a given bild to the idee
+     * @param bild
+     * @return 
+     */
     public String saveBild(Bild bild) {
         Bild tmp = new Bild();
         tmp.setUrl(bild.getUrl());
         tmp.setTitel(bild.getTitel());
         current.addBild(tmp);
         return "edit_idea.xhtml?faces-redirect-true";
+    }
+    
+    /**
+     * removes the given bild from the idee
+     * BUG: still exists in Bild db
+     * @param bild
+     * @return 
+     */
+    public String removeBild(Bild bild) {
+        current.removeBild(bild);
+        return "";
     }
 
     /**
@@ -56,6 +70,10 @@ public class IdeeController implements Serializable {
         return "idea.xhtml?faces-redirect-true";
     }
     
+    /**
+     * redirects to the edit page for the current idee
+     * @return 
+     */
     public String editIdee() {
         return "edit_idea.xhtml?faces-redirect-true";
     }

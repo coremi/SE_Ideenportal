@@ -27,11 +27,10 @@
             Angehängte Bilder:
             <c:forEach var="bilder" items="#{ideeController.selected.bilder}">
                 <br/>
-                Titel: ${bilder.titel} url: ${bilder.url}
-            </c:forEach>
-            
+                Titel: ${bilder.titel} url: ${bilder.url} <h:commandLink action="#{ideeController.removeBild(bilder)}" value="Remove" />
+            </c:forEach>            
             <!-- redirect to add_bild.xhtml -->
-            <h:link outcome="add_bild" value="Bild hinzufügen" class="button r" />
+            <h:commandLink action="#{bildController.newBild()}" value="Bild hinzufügen" class="button r" />
         </h:form>
     </ui:define>
 </ui:composition>

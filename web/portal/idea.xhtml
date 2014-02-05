@@ -30,6 +30,13 @@
             <br/>
             <br/>
             <br/>
+            <!-- Angehängte Bilder auflisten -->
+            Angehängte Bilder:
+            <c:forEach var="bilder" items="#{ideeController.selected.bilder}">
+                <br/>
+                Titel: ${bilder.titel} url: ${bilder.url}
+            </c:forEach>               
+            <br/><br/><br/><br/>
             <!-- show kommentare -->
             <c:forEach var="kommentar" items="#{kommentarController.itemsAvailableSelectMany}">
                 <c:if test="${kommentar.value.beitrag == ideeController.selected}">
