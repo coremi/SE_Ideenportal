@@ -19,6 +19,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import model.Bild;
+import model.Kommentar;
 import model.Mitarbeiter;
 
 @Named("ideeController")
@@ -37,13 +38,22 @@ public class IdeeController implements Serializable {
     public IdeeController() {
     }
       
-    
+    /**
+     * adds a vote to the bewertung
+     * @param i
+     * @return 
+     */
     public String voteIdee(int i) {
         current.setBewertung(i);
         current.addBewerter(mc.getSelected());
         return update();
     }
     
+    /**
+     * checks if the given mitarbeiter has already voted on the current idee
+     * @param mitarbeiter
+     * @return 
+     */
     public boolean alreadyVoted(Mitarbeiter mitarbeiter) {
         for (Mitarbeiter m : current.getBewerter()) {
             if (m.getId() == mitarbeiter.getId()) {
@@ -64,6 +74,19 @@ public class IdeeController implements Serializable {
         tmp.setTitel(bild.getTitel());
         current.addBild(tmp);
         return "edit_idea.xhtml?faces-redirect-true";
+    }
+    
+    /**
+     * adds a kommentar to the current idee
+     * @param kommentar
+     * @return 
+     */
+    public String addKommentar(Kommentar kommentar) {
+        current.addKommentar(kommentar);
+        Long tmp = current.getId();
+        update();
+        current = getIdee(tmp);
+        return "idea.xhtml?faces-redirect-true";
     }
     
     /**
