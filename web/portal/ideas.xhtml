@@ -2,32 +2,28 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./layout.xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html">
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="content">
         <h1>
             Alle Ideen
         </h1>
         <div class="idea_list">
+            <c:forEach var="idee" items="${ideeController.itemsAvailableSelectMany}">
             <div class="row">
                 <div class="topic">
-                    <h:link outcome="idea">
-                        Ein Ideenportal
-                    </h:link>
-                    
+                    <h:link outcome="idea" value="${idee.label}" />
                 </div>
                 <div class="author">
-                    Corina Meyer
+                    
                 </div>
                 <div class="vote">
-                    <span></span>
-                    <span></span>
-                    <span></span>
                 </div>
                 <div class="comments">
-                    10 Kommentare
                 </div>
             </div>
+        </c:forEach>
         </div>
     </ui:define>
 

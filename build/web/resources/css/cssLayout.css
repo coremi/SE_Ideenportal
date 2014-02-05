@@ -19,6 +19,10 @@ body {
     background-size: 90% 90%;
     background-repeat: no-repeat;
 }
+.c_row {
+    max-height: calc(100% - 42px);
+    overflow-y: auto;
+}
 a, h1, a:link, a:visited {
     color: #8F2674;
     text-decoration: none;
@@ -78,6 +82,7 @@ input, textarea, a.button {
     border: 2px solid #E88D19;
     box-shadow: none;
     color: #2E100B;
+    font-family: inherit;
 }
 input:focus, textarea:focus {
     border-color: #8F2674;
@@ -128,7 +133,7 @@ label {
     font-size: 1.3em;
 }
 .idea_list .row .topic {
-    width: 30%;
+    width: 100%;
 }
 .idea_list .row .author {
     width: 20%;
