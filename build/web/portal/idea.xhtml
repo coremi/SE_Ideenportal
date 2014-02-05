@@ -37,17 +37,21 @@
                     <h:commandLink value="Bearbeiten" action="#{ideeController.editIdee()}" />
                 </div>
             </c:if>
-            <c:if test="${mitarbeiterController.username != ideeController.selected.mitarbeiter.username}">
-                <c:if test="${ideeController.alreadyVoted(mitarbeiterController.selected) == false}">
-                    <h:commandLink value="Positiv bewerten" action="#{ideeController.voteIdee(1)}" />
-                    <h:commandLink value="Negativ bewerten" action="#{ideeController.voteIdee(-1)}" />
-                </c:if>
-            </c:if>
             <div class="author">
                 <h:outputText value="#{ideeController.selected.mitarbeiter.username}" />
             </div>
             <div class="vote">
-                <h:outputText value="#{ideeController.selected.bewertung}" />
+
+                <c:choose>
+                    <c:when test="${(ideeController.alreadyVoted(mitarbeiterController.selected) == false) and (mitarbeiterController.username != ideeController.selected.mitarbeiter.username)}">
+                        <h:commandLink value="-" action="#{ideeController.voteIdee(-1)}" />
+                        <h:outputText value="#{ideeController.selected.bewertung}" />
+                        <h:commandLink value="+" action="#{ideeController.voteIdee(1)}" />
+                    </c:when>
+                    <c:otherwise>
+                        <h:outputText value="#{ideeController.selected.bewertung}" />
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="date">
                 <h:outputText value="#{ideeController.selected.datum}">
@@ -56,23 +60,29 @@
             </div>
 
             <hr />
+            <div class="row">
+                <h2>
+                    Kommentare
+                </h2>
+            </div>
+            <hr />
             <!-- show kommentare -->
             <c:forEach var="kommentar" items="#{kommentarController.itemsAvailableSelectMany}">
                 <c:if test="${kommentar.value.beitrag == ideeController.selected}">
                     <div class="row">
                         <h:outputText value="#{kommentar.value.mitarbeiter.username}" />
                         schrieb am 
-                        <h:outputText value="#{kommentar.value.datum}" />
-                        :
-                        <br/>
+                        <h:outputText value="#{kommentar.value.datum}">
+                            <f:convertDateTime type="both" pattern="dd.MM.YYYY hh:mm" />
+                        </h:outputText>
+                    </div>
+                    <div class="row">
                         <h:outputText value="#{kommentar.value.beschreibung}" />
                     </div>
+                    <hr />
                 </c:if>
             </c:forEach>
-            <br/>
-            <br/>
-            <br/>
-            <div>
+            <div class="row">
                 <h:inputText value="#{kommentarController.selected.beschreibung}"/>
                 <h:commandLink value="Kommentar hinterlassen" action="#{kommentarController.createKommentar(ideeController.selected, mitarbeiterController.selected)}" class="button r" />
             </div>
