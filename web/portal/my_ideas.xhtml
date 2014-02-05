@@ -13,24 +13,8 @@
             <!-- show every idee entry from database -->
             <c:forEach var="idee" items="${ideeController.itemsAvailableSelectMany}">
                 <!-- show only the ideas created by the logged in Mitarbeiter -->
-                <c:if test="${mitarbeiterController.username == idee.value.mitarbeiter.username}">
-                    <h:form>
-                        <div class="row">
-                            <div class="topic">
-                                <!-- show the idea.xhtml on click on the idee titel -->
-                                <h:commandLink action="#{ideeController.showIdee(idee.value.id)}" value="${idee.value.titel}" />
-                            </div>
-                            <div class="author">
-                                <h:outputLabel value="${idee.value.mitarbeiter.username}" />
-                            </div>
-                            <div class="vote">
-                                <h:outputLabel value="${idee.value.bewertung}" />
-                            </div>
-                            <div class="comments">
-                                
-                            </div>
-                        </div>
-                    </h:form>
+                <c:if test="${mitarbeiterController.username == idee.value.mitarbeiter.username}">  
+                    <ui:include src="idea_list_item.xhtml"/>
                 </c:if>
             </c:forEach>
         </div>
