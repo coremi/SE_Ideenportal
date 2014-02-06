@@ -29,12 +29,14 @@
             </c:if>
             <c:if test="#{ideeController.hasAnhaenge()}">
                 <hr class="small" />
+                <h4>
+                    Dateianhänge:
+                </h4>
                 <c:forEach var="anhaenge" items="#{ideeController.selected.anhaenge}">
                     <div class="row">
-                        Titel: ${anhaenge.titel}
-                    </div>
-                    <div class="row">
-                        Url: ${anhaenge.url}
+                        <a target="_blank" href="${anhaenge.url}">
+                            ${anhaenge.titel}
+                        </a>
                     </div>
                 </c:forEach>
             </c:if>
