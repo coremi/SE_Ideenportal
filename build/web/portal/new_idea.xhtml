@@ -17,8 +17,10 @@
             <div class="row">
                 <h:outputLabel value="#{bundle.CreateIdeeLabel_beschreibung}" for="beschreibung" class="label" />
                 <h:inputTextarea rows="4" cols="20" id="beschreibung" value="#{ideeController.selected.beschreibung}" title="#{bundle.CreateIdeeTitle_beschreibung}" class="form-control" />                                     
-            </div>       
-            <h:commandLink action="#{ideeController.create}" value="Erstellen" class="button r" />
+            </div>
+            <div class="row">                
+                <h:commandLink action="#{ideeController.create()}" value="Erstellen" class="button r" />
+            </div>         
         </h:form>
     </ui:define>
 </ui:composition>

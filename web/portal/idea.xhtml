@@ -15,28 +15,28 @@
                 <h:outputText value="#{ideeController.selected.beschreibung}" />
             </div>
             <c:if test="#{ideeController.hasBilder()}">
-            <hr class="small" />
-            <c:forEach var="bilder" items="#{ideeController.selected.bilder}">
-                <div class="row">
-                    <div class="img">
-                        <img src="${bilder.url}" alt="${bilder.titel}"/><br />
-                        <div class="img_title">
-                            Titel: ${bilder.titel}
+                <hr class="small" />
+                <c:forEach var="bilder" items="#{ideeController.selected.bilder}">
+                    <div class="row">
+                        <div class="img">
+                            <img src="${bilder.url}" alt="${bilder.titel}"/><br />
+                            <div class="img_title">
+                                Titel: ${bilder.titel}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </c:forEach>
+                </c:forEach>
             </c:if>
             <c:if test="#{ideeController.hasAnhaenge()}">
-            <hr class="small" />
-            <c:forEach var="anhaenge" items="#{ideeController.selected.anhaenge}">
-                <div class="row">
-                    Titel: ${anhaenge.titel}
-                </div>
-                <div class="row">
-                    Url: ${anhaenge.url}
-                </div>
-            </c:forEach>
+                <hr class="small" />
+                <c:forEach var="anhaenge" items="#{ideeController.selected.anhaenge}">
+                    <div class="row">
+                        Titel: ${anhaenge.titel}
+                    </div>
+                    <div class="row">
+                        Url: ${anhaenge.url}
+                    </div>
+                </c:forEach>
             </c:if>
             <!-- last edited if exists -->
             <c:if test="${ideeController.selected.editiert != null}">

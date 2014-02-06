@@ -7,7 +7,7 @@
 
     <ui:define name="content">
         <h1>
-            Neue Idee
+            Idee bearbeiten
         </h1>
         <h:form>
             <div class="row">
@@ -76,7 +76,6 @@
                 <div class="row"><hr class="small" /></div>            
             </c:if>            
             <div class="row">                
-            <!-- update idee in database, redirect to idea.xhtml -->
                 <h:commandLink action="#{ideeController.updateWithEditDate()}" value="Speichern" class="button r" />
             </div>         
         </h:form>
