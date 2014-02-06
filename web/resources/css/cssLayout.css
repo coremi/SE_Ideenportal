@@ -223,3 +223,10 @@ img.login_title {
     width: 50%;
     margin: 5% 25%;
 }
+.list {
+    line-height: 3em;
+    font-size: 1.5em;
+}
+.list form {
+    margin-bottom: auto;
+}

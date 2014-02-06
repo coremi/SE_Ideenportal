@@ -5,8 +5,26 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <ui:define name="content">
-
-
+        <h1>
+            Willkommen bei Lights, dem Ideenportal!
+        </h1>
+        <div class="list">
+        Von hier aus können Sie...
+            <div class="row">
+                <h:link value="...ihr Profil einsehen und bearbeiten." outcome="user_profile" />
+            </div>
+        <h:form>
+            <div class="row">
+                 <h:commandLink action="#{ideeController.newIdee()}" value="...eine neue Idee erstellen und veröffentlichen." />
+            </div>
+        </h:form>
+            <div class="row">
+                <h:link value="...ihre eigenen Ideen ansehen und bearbeiten." outcome="my_ideas"/>
+            </div>
+            <div class="row">
+                <h:link value="...die Ideen aller ansehen, kommentieren und bewerten." outcome="ideas"/>
+            </div>
+        </div>
 
 
     </ui:define>
