@@ -25,7 +25,9 @@ import model.Mitarbeiter;
 @Named("ideeController")
 @SessionScoped
 public class IdeeController implements Serializable {
-
+    
+    @Inject
+    private BildController bc;
     @Inject
     private MitarbeiterController mc;  
     private Idee current;
@@ -73,7 +75,16 @@ public class IdeeController implements Serializable {
         tmp.setUrl(bild.getUrl());
         tmp.setTitel(bild.getTitel());
         current.addBild(tmp);
+        bc.newBild();
         return "edit_idea.xhtml?faces-redirect-true";
+    }
+    
+    /**
+     * returns true, if the current idee has bilder
+     * @return 
+     */
+    public boolean hasBilder() {
+        return !current.getBilder().isEmpty();
     }
     
     /**

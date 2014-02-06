@@ -19,25 +19,35 @@
                 <h:inputTextarea rows="4" cols="20" id="beschreibung" value="#{ideeController.selected.beschreibung}" title="#{bundle.CreateIdeeTitle_beschreibung}" class="form-control" />                                     
             </div>
             <div class="row"><hr class="small"/></div>
+            <div class="row">
+            <!-- Bild hinzufügen -->
+            <h:commandLink action="${ideeController.saveBild(bildController.selected)}" value="Bild speichern" class="r" />
+                <h2>Bild hinzufügen:</h2>
+            </div>
+            <div class="row">
+                <h:outputLabel value="#{bundle.CreateBildLabel_titel}" for="bild_titel" class="label"/>
+                <h:inputText id="bild_titel" value="#{bildController.selected.titel}" title="#{bundle.CreateBildTitel_titel}" class="form-control" />   
+                <h:outputLabel value="#{bundle.CreateBildLabel_url}" for="url" class="label"/>
+                <h:inputText id="url" value="#{bildController.selected.url}" title="#{bundle.CreateBildUrl_url}" class="form-control" />
+            </div>
+            <div class="row"><hr class="small" /></div>
             <!-- Angehängte Bilder auflisten -->
-            <div class="row">
-            <!-- redirect to add_bild.xhtml -->
-            <h:commandLink action="#{bildController.newBild()}" value="Bild hinzufügen" class="r" />
-                <h2>Angehängte Bilder:</h2>
-            </div>
-            <c:forEach var="bilder" items="#{ideeController.selected.bilder}">
+            <c:if test="${ideeController.hasBilder()}">
                 <div class="row">
-                  <h:commandLink action="#{ideeController.removeBild(bilder)}" value="Remove" class="r" />
-                    Titel: ${bilder.titel}
+                    <h2>Angehängte Bilder:</h2>
                 </div>
-                <div class="row">
-                    Url: ${bilder.url}
-                </div>
-            </c:forEach>
-            <div class="row">
-                <hr class="small" />
-            </div>
-            <div class="row">
+                <c:forEach var="bilder" items="#{ideeController.selected.bilder}">
+                    <div class="row">
+                        <h:commandLink action="#{ideeController.removeBild(bilder)}" value="Remove" class="r" />
+                        Titel: ${bilder.titel}
+                    </div>
+                    <div class="row">
+                        Url: ${bilder.url}
+                    </div>
+                </c:forEach>
+                <div class="row"><hr class="small" /></div>            
+            </c:if>
+            <div class="row">                
             <!-- update idee in database, redirect to idea.xhtml -->
                 <h:commandLink action="#{ideeController.updateWithEditDate()}" value="Speichern" class="button r" />
             </div>         
