@@ -17,6 +17,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import model.Bild;
 
 @Named("anhangController")
 @SessionScoped
@@ -32,6 +33,15 @@ public class AnhangController implements Serializable {
     public AnhangController() {
     }
 
+    /**
+     * deselects any selected bild and redirects to add_bild.xhtml
+     * @return 
+     */
+    public String newAnhang() {
+        current = new Anhang();
+        return "";
+    }    
+    
     public Anhang getSelected() {
         if (current == null) {
             current = new Anhang();

@@ -14,7 +14,7 @@ public class Anhang implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String URL;
+    private String url;
 
     private String titel;
 
@@ -35,15 +35,15 @@ public class Anhang implements Serializable {
     /**
      * @return the URL
      */
-    public String getURL() {
-        return URL;
+    public String getUrl() {
+        return url;
     }
 
     /**
      * @param URL the URL to set
      */
-    public void setURL(String URL) {
-        this.URL = URL;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**

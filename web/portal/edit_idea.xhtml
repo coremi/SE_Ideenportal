@@ -27,8 +27,8 @@
             <div class="row">
                 <h:outputLabel value="#{bundle.CreateBildLabel_titel}" for="bild_titel" class="label"/>
                 <h:inputText id="bild_titel" value="#{bildController.selected.titel}" title="#{bundle.CreateBildTitel_titel}" class="form-control" />   
-                <h:outputLabel value="#{bundle.CreateBildLabel_url}" for="url" class="label"/>
-                <h:inputText id="url" value="#{bildController.selected.url}" title="#{bundle.CreateBildUrl_url}" class="form-control" />
+                <h:outputLabel value="#{bundle.CreateBildLabel_url}" for="bild_url" class="label"/>
+                <h:inputText id="bild_url" value="#{bildController.selected.url}" title="#{bundle.CreateBildUrl_url}" class="form-control" />
             </div>
             <div class="row"><hr class="small" /></div>
             <!-- Angehängte Bilder auflisten -->
@@ -47,6 +47,34 @@
                 </c:forEach>
                 <div class="row"><hr class="small" /></div>            
             </c:if>
+            <div class="row">
+            <!-- Anhang hinzufügen -->
+            <h:commandLink action="${ideeController.saveAnhang(anhangController.selected)}" value="Anhang speichern" class="r" />
+                <h2>Ressourcen hinzufügen:</h2>
+            </div>
+            <div class="row">
+                <h:outputLabel value="#{bundle.CreateAnhangLabel_titel}" for="anhang_titel" class="label"/>
+                <h:inputText id="anhang_titel" value="#{anhangController.selected.titel}" title="#{bundle.CreateAnhangTitel_titel}" class="form-control" />   
+                <h:outputLabel value="#{bundle.CreateAnhangLabel_url}" for="anhang_url" class="label"/>
+                <h:inputText id="anhang_url" value="#{anhangController.selected.url}" title="#{bundle.CreateAnhangTitle_url}" class="form-control" />
+            </div>
+            <div class="row"><hr class="small" /></div>
+            <!-- Anhänge auflisten -->
+            <c:if test="${ideeController.hasAnhaenge()}">
+                <div class="row">
+                    <h2>Weitere Ressourcen:</h2>
+                </div>
+                <c:forEach var="anhaenge" items="#{ideeController.selected.anhaenge}">
+                    <div class="row">
+                        <h:commandLink action="#{ideeController.removeAnhang(anhaenge)}" value="Remove" class="r" />
+                        Titel: ${anhaenge.titel}
+                    </div>
+                    <div class="row">
+                        Url: ${anhaenge.url}
+                    </div>
+                </c:forEach>
+                <div class="row"><hr class="small" /></div>            
+            </c:if>            
             <div class="row">                
             <!-- update idee in database, redirect to idea.xhtml -->
                 <h:commandLink action="#{ideeController.updateWithEditDate()}" value="Speichern" class="button r" />

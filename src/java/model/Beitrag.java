@@ -49,7 +49,7 @@ public class Beitrag implements Serializable {
      * @element-type Bild
      */
     @OneToMany
-    private Collection<Bild> bilder;
+    private Collection<Bild> bilder; 
 
     public Beitrag() {
         this.datum = new Date();
@@ -165,7 +165,6 @@ public class Beitrag implements Serializable {
     public void removeBild(Bild bild) {
         this.bilder.remove(bild);
     }
-
     /**
      *
      * @return 
@@ -217,6 +216,5 @@ public class Beitrag implements Serializable {
     public void setKommentare(Collection<Kommentar> kommentare) {
         this.kommentare = kommentare;
     }
-
 
 }

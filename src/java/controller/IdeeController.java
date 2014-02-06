@@ -18,6 +18,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+import model.Anhang;
 import model.Bild;
 import model.Kommentar;
 import model.Mitarbeiter;
@@ -28,6 +29,8 @@ public class IdeeController implements Serializable {
     
     @Inject
     private BildController bc;
+    @Inject
+    private AnhangController ac;    
     @Inject
     private MitarbeiterController mc;  
     private Idee current;
@@ -79,6 +82,15 @@ public class IdeeController implements Serializable {
         return "edit_idea.xhtml?faces-redirect-true";
     }
     
+    public String saveAnhang(Anhang anhang) {
+        Anhang tmp = new Anhang();
+        tmp.setUrl(anhang.getUrl());
+        tmp.setTitel(anhang.getTitel());
+        current.addAnhang(tmp);
+        ac.newAnhang();
+        return "edit_idea.xhtml?faces-redirect-true";
+    }
+    
     /**
      * returns true, if the current idee has bilder
      * @return 
@@ -86,6 +98,14 @@ public class IdeeController implements Serializable {
     public boolean hasBilder() {
         return !current.getBilder().isEmpty();
     }
+    
+    /**
+     * returns true, if the current idee has anhaenge
+     * @return 
+     */
+    public boolean hasAnhaenge() {
+        return !current.getAnhaenge().isEmpty();
+    }    
     
     /**
      * adds a kommentar to the current idee
@@ -110,6 +130,17 @@ public class IdeeController implements Serializable {
         current.removeBild(bild);
         return "";
     }
+    
+    /**
+     * removes the given bild from the idee
+     * BUG: still exists in Bild db
+     * @param bild
+     * @return 
+     */
+    public String removeAnhang(Anhang anhang) {
+        current.removeAnhang(anhang);
+        return "";
+    }    
 
     /**
      * redirects to the idea.xhtml for the idea with the given id
