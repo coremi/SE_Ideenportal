@@ -3,7 +3,6 @@
     Created on : Feb 6, 2014, 8:39:08 AM
     Author     : corina
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
@@ -18,7 +17,7 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>Lights - das Ideenportal</title>
         <style type="text/css">
-            
+        
         <jsp:include page="resources/css/cssLayout.css" />
         </style>
         </head>
@@ -47,7 +46,7 @@
                 </div>
             </div>
             <div class="row" style="text-align: right">
-                <h:commandButton type="submit"  value="Einloggen" />
+                <h:commandButton type="submit"  value="Anmelden" />
             </div>
             
         </form>
